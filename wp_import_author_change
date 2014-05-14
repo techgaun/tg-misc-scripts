@@ -1,0 +1,6 @@
+//wrote the script below to quickly change the author for 100s of posts in wordpress
+//while importing
+//not sure if there's any other quick way on interface itself
+// ctrl + shift + k, a simple document.getElementsByTagName should also work
+
+for (i = 1; i < 149; i++) {document.getElementsByName('user_map[' + i + ']').selectedIndex = 1;}
