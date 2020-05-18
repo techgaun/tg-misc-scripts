@@ -50,7 +50,7 @@ while read repo; do
   rm -rf "${repo}.git"
   git clone --bare "git@bitbucket.org:${BB_ORG}/${repo}.git"
   cd "${repo}.git"
-  curl -H 'Accept: application/vnd.github.nebula-preview+json' -u "${GH_CRED}" "https://api.github.com/orgs/${GH_ORG}/repos" -d "{\"name\": \"${repo}\", \"private\": true, \"visibility\": \"internal\"}"
+  curl -H 'Accept: application/vnd.github.nebula-preview+json' -u "${GH_CRED}" "https://api.github.com/orgs/${GH_ORG}/repos" -d "{\"name\": \"${repo}\", \"private\": true, \"visibility\": \"internal\", \"delete_branch_on_merge\": true}"
   curl -XPUT -u "${GH_CRED}" "https://api.github.com/orgs/${GH_ORG}/teams/engineering/repos/${GH_ORG}/${repo}" -d '{"permission": "push"}'
   curl -XPUT -u "${GH_CRED}" "https://api.github.com/orgs/${GH_ORG}/teams/qe/repos/${GH_ORG}/${repo}" -d '{"permission": "push"}'
   git push --mirror "git@github.com:${GH_ORG}/${repo}.git"
